@@ -1,0 +1,20 @@
+{"id": 1, "name": "Alice", "age": 32, "status": "active", "city": "New York", "score": 88.5, "tags": ["admin", "user"], "address": {"street": "123 Main St", "zip": "10001"}, "deleted_at": null}
+{"id": 2, "name": "Bob", "age": 17, "status": "active", "city": "Los Angeles", "score": 72.0, "tags": ["user"], "address": {"street": "456 Oak Ave", "zip": "90001"}, "deleted_at": null}
+{"id": 3, "name": "Carol", "age": 45, "status": "inactive", "city": "New York", "score": 95.2, "tags": ["admin"], "address": {"street": "789 Pine Rd", "zip": "10002"}, "deleted_at": "2024-01-15"}
+{"id": 4, "name": "Dave", "age": 28, "status": "active", "city": "Chicago", "score": 60.1, "tags": ["user", "moderator"], "address": {"street": "321 Elm St", "zip": "60601"}, "deleted_at": null}
+{"id": 5, "name": "Eve", "age": 23, "status": "active", "city": "Los Angeles", "score": 84.7, "tags": ["user"], "address": {"street": "654 Maple Dr", "zip": "90002"}, "deleted_at": null}
+{"id": 6, "name": "Frank", "age": 55, "status": "inactive", "city": "Chicago", "score": 91.0, "tags": ["admin", "moderator"], "address": {"street": "987 Birch Ln", "zip": "60602"}, "deleted_at": "2023-11-30"}
+{"id": 7, "name": "Grace", "age": 19, "status": "active", "city": "New York", "score": 76.3, "tags": ["user"], "address": {"street": "111 Cedar Ave", "zip": "10003"}, "deleted_at": null}
+{"id": 8, "name": "Hank", "age": 38, "status": "active", "city": "Los Angeles", "score": 55.8, "tags": ["user"], "address": {"street": "222 Walnut St", "zip": "90003"}, "deleted_at": null}
+{"id": 9, "name": "Iris", "age": 29, "status": "inactive", "city": "Chicago", "score": 99.9, "tags": ["admin", "user"], "address": {"street": "333 Spruce Blvd", "zip": "60603"}, "deleted_at": "2024-03-01"}
+{"id": 10, "name": "Jack", "age": 41, "status": "active", "city": "New York", "score": 67.4, "tags": ["moderator"], "address": {"street": "444 Ash St", "zip": "10004"}, "deleted_at": null}
+{"id": 11, "name": "Karen", "age": 15, "status": "active", "city": "Los Angeles", "score": 82.0, "tags": ["user"], "address": {"street": "555 Poplar Rd", "zip": "90004"}, "deleted_at": null}
+{"id": 12, "name": "Leo", "age": 34, "status": "active", "city": "Chicago", "score": 74.6, "tags": ["user", "admin"], "address": {"street": "666 Willow Way", "zip": "60604"}, "deleted_at": null}
+{"id": 13, "name": "Mia", "age": 26, "status": "inactive", "city": "New York", "score": 88.1, "tags": ["user"], "address": {"street": "777 Hickory Ln", "zip": "10005"}, "deleted_at": "2024-02-14"}
+{"id": 14, "name": "Ned", "age": 50, "status": "active", "city": "Los Angeles", "score": 93.3, "tags": ["admin"], "address": {"street": "888 Magnolia Ct", "zip": "90005"}, "deleted_at": null}
+{"id": 15, "name": "Olive", "age": 22, "status": "active", "city": "Chicago", "score": 61.5, "tags": ["user"], "address": {"street": "999 Cherry Blvd", "zip": "60605"}, "deleted_at": null}
+{"id": 16, "name": "Pat", "age": 37, "status": "inactive", "city": "New York", "score": 78.9, "tags": ["moderator", "user"], "address": {"street": "101 Peach St", "zip": "10006"}, "deleted_at": "2023-09-10"}
+{"id": 17, "name": "Quinn", "age": 44, "status": "active", "city": "Los Angeles", "score": 85.2, "tags": ["admin", "user"], "address": {"street": "202 Plum Ave", "zip": "90006"}, "deleted_at": null}
+{"id": 18, "name": "Rose", "age": 31, "status": "active", "city": "Chicago", "score": 70.0, "tags": ["user"], "address": {"street": "303 Berry Ln", "zip": "60606"}, "deleted_at": null}
+{"id": 19, "name": "Sam", "age": 27, "status": "active", "city": "New York", "score": 90.5, "tags": ["admin"], "address": {"street": "404 Grape Rd", "zip": "10007"}, "deleted_at": null}
+{"id": 20, "name": "Tara", "age": 16, "status": "inactive", "city": "Los Angeles", "score": 66.7, "tags": ["user"], "address": {"street": "505 Lemon St", "zip": "90007"}, "deleted_at": "2024-04-01"}
