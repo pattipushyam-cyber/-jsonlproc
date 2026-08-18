@@ -38,6 +38,10 @@ def demo_streaming() -> None:
     print(f"Random sample of 5: {[r['name'] for r in sample5]}")
     print(f"Bad lines encountered: {stream.bad_line_count}")
 
+    # Batching demonstration
+    batches = list(stream.batch(5))
+    print(f"Batches of 5: {len(batches)} batches created")
+
 
 def demo_filtering() -> None:
     """Show FilterEngine with various operators."""

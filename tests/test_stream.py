@@ -137,3 +137,38 @@ def test_path_as_string(tmp_path: Path) -> None:
     _write_jsonl(p, [{"x": 1}])
     result = list(JsonlStream(str(p)))
     assert result == [{"x": 1}]
+
+
+def test_gzip_streaming(tmp_path: Path) -> None:
+    import gzip
+    p = tmp_path / "data.jsonl.gz"
+    with gzip.open(p, "wt", encoding="utf-8") as f:
+        for i in range(25):
+            f.write(json.dumps({"id": i, "val": i * 3}) + "\n")
+    stream = JsonlStream(p)
+    result = list(stream)
+    assert len(result) == 25
+    assert result[0] == {"id": 0, "val": 0}
+    assert result[24] == {"id": 24, "val": 72}
+
+
+def test_batching(tmp_path: Path) -> None:
+    p = tmp_path / "data.jsonl"
+    _write_jsonl(p, [{"x": i} for i in range(10)])
+    stream = JsonlStream(p)
+    batches = list(stream.batch(3))
+    assert len(batches) == 4
+    assert len(batches[0]) == 3
+    assert len(batches[1]) == 3
+    assert len(batches[2]) == 3
+    assert len(batches[3]) == 1
+    assert batches[0] == [{"x": 0}, {"x": 1}, {"x": 2}]
+
+
+def test_batching_invalid_size(tmp_path: Path) -> None:
+    p = tmp_path / "data.jsonl"
+    _write_jsonl(p, [{"x": 1}])
+    stream = JsonlStream(p)
+    with pytest.raises(ValueError):
+        list(stream.batch(0))
+

@@ -164,3 +164,26 @@ def test_pretty_output(sample_file: Path, capsys) -> None:
     out, err, code = run_cli([str(sample_file), "--pretty", "--limit", "1"], capsys)
     assert code == 0
     assert "\n" in out  # pretty printed has newlines within record
+
+
+def test_output_to_gzip_file(sample_file: Path, tmp_path: Path) -> None:
+    import gzip
+    out_file = tmp_path / "out.jsonl.gz"
+    code = main([str(sample_file), "--output", str(out_file)])
+    assert code == 0
+    assert out_file.exists()
+    with gzip.open(out_file, "rt", encoding="utf-8") as f:
+        lines = [l for l in f.read().strip().split("\n") if l]
+    assert len(lines) == 5
+
+
+def test_input_from_gzip_file(sample_file: Path, tmp_path: Path, capsys) -> None:
+    import gzip
+    gz_input = tmp_path / "input.jsonl.gz"
+    with sample_file.open("rb") as f_in, gzip.open(gz_input, "wb") as f_out:
+        f_out.writelines(f_in)
+    out, err, code = run_cli([str(gz_input), "--limit", "2"], capsys)
+    lines = [l for l in out.strip().split("\n") if l]
+    assert code == 0
+    assert len(lines) == 2
+

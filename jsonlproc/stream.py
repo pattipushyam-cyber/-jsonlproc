@@ -1,11 +1,9 @@
-"""Core streaming engine for JSONL files."""
-from __future__ import annotations
-
-import sys
+import gzip
 import heapq
 import random
+import sys
 from pathlib import Path
-from typing import Any, Iterator, Callable
+from typing import Any, Callable, Iterator
 
 try:
     import orjson
@@ -20,12 +18,12 @@ except ImportError:
 class JsonlStream:
     """Streaming processor for JSON Lines files.
 
-    Reads JSONL files line by line without loading the entire dataset
-    into memory. Supports stdin, malformed line handling, and lazy
-    pipeline chaining.
+    Reads JSONL and Gzip-compressed JSONL files line by line without loading
+    the entire dataset into memory. Supports stdin, malformed line handling,
+    batching, and lazy pipeline chaining.
 
     Args:
-        path: Path to the .jsonl file, or "-" to read from stdin.
+        path: Path to the .jsonl or .jsonl.gz file, or "-" to read from stdin.
 
     Attributes:
         path: Resolved path or "-" for stdin.
@@ -37,13 +35,15 @@ class JsonlStream:
         self.bad_line_count: int = 0
 
     def _open(self):
-        """Open the source for reading.
+        """Open the source for reading, supporting gzip if path ends in .gz.
 
         Returns:
             A file-like object.
         """
         if self.path == "-":
             return sys.stdin
+        if self.path.endswith(".gz"):
+            return gzip.open(self.path, "rt", encoding="utf-8")
         return open(self.path, "r", encoding="utf-8")
 
     def __iter__(self) -> Iterator[dict]:
@@ -128,3 +128,24 @@ class JsonlStream:
                 if j < n:
                     reservoir[j] = record
         return reservoir
+
+    def batch(self, size: int) -> Iterator[list[dict]]:
+        """Yield records in batches of specified size.
+
+        Args:
+            size: Maximum number of records per batch.
+
+        Yields:
+            Lists containing up to `size` records.
+        """
+        if size <= 0:
+            raise ValueError(f"Batch size must be positive, got {size}")
+        buf: list[dict] = []
+        for record in self:
+            buf.append(record)
+            if len(buf) >= size:
+                yield buf
+                buf = []
+        if buf:
+            yield buf
+

@@ -88,10 +88,15 @@ stream = JsonlStream("users.jsonl")
 for record in stream:
     print(record)
 
-# --- Head / Count / Sample ---
+# --- Head / Count / Sample / Batch ---
 first_5 = stream.head(5)
 total   = stream.count()
 sample  = stream.sample(100)  # reservoir sampling
+batches = list(stream.batch(50))  # chunk stream into batches of 50
+
+# --- Transparent Gzip Compression ---
+# Automatically reads .jsonl.gz and writes compressed output
+gz_stream = JsonlStream("data.jsonl.gz")
 
 # --- Filter ---
 fe = FilterEngine("age >= 18 AND status == 'active'")

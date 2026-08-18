@@ -186,8 +186,13 @@ def main(argv: list[str] | None = None) -> int:
         # --- output ---
         if args.output:
             out_path = Path(args.output)
-            with out_path.open("w", encoding="utf-8") as f:
-                written = _write_output(pipeline, f, args.format, args.pretty)
+            if str(out_path).endswith(".gz"):
+                import gzip
+                with gzip.open(out_path, "wt", encoding="utf-8") as f:
+                    written = _write_output(pipeline, f, args.format, args.pretty)
+            else:
+                with out_path.open("w", encoding="utf-8") as f:
+                    written = _write_output(pipeline, f, args.format, args.pretty)
         else:
             written = _write_output(pipeline, sys.stdout, args.format, args.pretty)
 
